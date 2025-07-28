@@ -126,7 +126,6 @@ function HeroSection() {
     }
   }, [error]);
 
-
   if (submit && status === "success") {
     // prevent HeroSection from rendering right before navigate
     return null;
@@ -136,14 +135,11 @@ function HeroSection() {
       {/* Hero Section with Bus Park Background */}
       <div className="relative overflow-hidden text-white h-screen flex items-center">
         {/* Bus Park Background Image */}
-        <div
-          className="absolute inset-0 bg-cover bg-center z-0"
-          style={{
-            backgroundImage: `url(${bus})`,
-            filter: "blur(0px) brightness(0.9)",
-          }}
-        ></div>
-
+        <img
+          src={bus}
+          alt="Bus Background"
+          className="absolute inset-0 w-full h-full object-cover z-0"
+        />
         {/* Semi-transparent overlay */}
         <div className="absolute inset-0 bg-gradient-to-b from-blue-900/40 to-blue-800/40 z-0"></div>
 
