@@ -13,7 +13,7 @@ const app = express();
 connectToDatabase()
 app.use(cookieParser());
 app.use(cors({
-  origin: 'http://localhost:5173', // your frontend's origin
+  origin: 'https://bus-ticket-b9go.vercel.app', // your frontend's origin
   credentials: true               // 🔥 Allow credentials
 }));
 app.use(express.json());

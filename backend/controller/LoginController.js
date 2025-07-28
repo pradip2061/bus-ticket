@@ -26,7 +26,7 @@ try {
     res.cookie('token', token, {
   httpOnly: true,
   secure: true, // since no HTTPS in development
-  sameSite: 'lax', // or 'strict'
+  sameSite: 'None', // or 'strict'
   maxAge: 7 * 24 * 60 * 60 * 1000 // 7 days
 });   
 
@@ -39,8 +39,8 @@ const logout =async(req,res)=>{
     try {
         res.clearCookie('token', {
     httpOnly: true,
-    secure: false, // true in production
-    sameSite: 'lax',
+    secure: true, // true in production
+    sameSite: 'None',
   });
   res.status(200).json({ message: 'Logged out successfully' });
     } catch (error) {
