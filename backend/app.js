@@ -18,6 +18,10 @@ app.use(cors({
 }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use('/yatranepal',loginsignup,createpathRouter,getpathRouter,ratingRouter,paymentverifyRouter,AdminRouter)
-
+app.use('/yatranepal',loginsignup)
+app.use('/yatranepal',createpathRouter)
+app.use('/yatranepal',getpathRouter)
+app.use('/yatranepal',ratingRouter)
+app.use('/yatranepal',paymentverifyRouter)
+app.use('/yatranepal',AdminRouter)
 module.exports = app;
