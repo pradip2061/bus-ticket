@@ -161,7 +161,7 @@ function HeroSection() {
         </div>
 
         {/* Main Content */}
-        <div className="relative max-w-7xl mx-auto px-4 py-12 pt-94 sm:px-6 lg:px-8 z-20 w-full lg:pt-0">
+        <div className="relative max-w-7xl mx-auto px-4 py-12 pt-74 sm:px-6 lg:px-8 z-20 w-full lg:pt-0">
           <div className="text-center">
             <h1 className="text-5xl md:text-7xl font-bold mb-6 animate-fade-in">
               Book Your Perfect
