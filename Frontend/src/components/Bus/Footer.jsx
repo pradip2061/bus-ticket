@@ -1,22 +1,23 @@
 import React from "react";
 import {
-  Bus,
-  Mail,
-  Phone,
-  MapPin,
-  Facebook,
-  Twitter,
-  Instagram,
-  Linkedin,
-  Star,
-  Shield,
-  Clock,
-  CreditCard,
-} from "lucide-react";
+  FaBus,
+  FaFacebookF,
+  FaTwitter,
+  FaInstagram,
+  FaLinkedinIn,
+  FaPhoneAlt,
+  FaMapMarkerAlt,
+  FaStar,
+  FaShieldAlt,
+  FaClock,
+  FaCreditCard,
+} from "react-icons/fa";
+import { MdEmail } from "react-icons/md";
 import logo from "../../assets/logo.png";
+
 export default function Footer() {
   return (
-    <footer className="bg-black text-white ">
+    <footer className="bg-black text-white">
       {/* Main Footer Content */}
       <div className="max-w-7xl mx-auto px-4 py-16 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -29,7 +30,9 @@ export default function Footer() {
                 className="h-24 w-38 object-contain"
               />
               <div className="absolute ml-34">
-                <h3 className="text-xl text-black font-bold"><span className="text-blue-500">यात्रा </span>Nepal</h3>
+                <h3 className="text-xl text-black font-bold">
+                  <span className="text-blue-500">यात्रा </span>Nepal
+                </h3>
                 <p className="text-black text-sm">Travel Made Easy</p>
               </div>
             </div>
@@ -39,30 +42,17 @@ export default function Footer() {
               confidence.
             </p>
             <div className="flex space-x-4">
-              <a
-                href="#"
-                className="w-10 h-10 bg-gray-800 hover:bg-blue-600 rounded-full flex items-center justify-center transition-colors duration-200"
-              >
-                <Facebook className="h-5 w-5 text-white" />
-              </a>
-              <a
-                href="#"
-                className="w-10 h-10 bg-gray-800 hover:bg-blue-600 rounded-full flex items-center justify-center transition-colors duration-200"
-              >
-                <Twitter className="h-5 w-5 text-white" />
-              </a>
-              <a
-                href="#"
-                className="w-10 h-10 bg-gray-800 hover:bg-blue-600 rounded-full flex items-center justify-center transition-colors duration-200"
-              >
-                <Instagram className="h-5 w-5 text-white" />
-              </a>
-              <a
-                href="#"
-                className="w-10 h-10 bg-gray-800 hover:bg-blue-600 rounded-full flex items-center justify-center transition-colors duration-200"
-              >
-                <Linkedin className="h-5 w-5 text-white" />
-              </a>
+              {[FaFacebookF, FaTwitter, FaInstagram, FaLinkedinIn].map(
+                (Icon, i) => (
+                  <a
+                    key={i}
+                    href="#"
+                    className="w-10 h-10 bg-gray-800 hover:bg-blue-600 rounded-full flex items-center justify-center transition-colors duration-200"
+                  >
+                    <Icon className="h-5 w-5 text-white" />
+                  </a>
+                )
+              )}
             </div>
           </div>
 
@@ -124,34 +114,37 @@ export default function Footer() {
           <div className="space-y-6">
             <h4 className="text-lg font-semibold text-white">Contact Us</h4>
             <div className="space-y-4">
+              {/* Phone */}
               <div className="flex items-start space-x-3">
                 <div className="w-10 h-10 bg-gray-800 rounded-lg flex items-center justify-center flex-shrink-0">
-                  <Phone className="h-5 w-5 text-white" />
+                  <FaPhoneAlt className="h-5 w-5 text-white" />
                 </div>
                 <div>
                   <p className="text-gray-300">24/7 Customer Support</p>
                   <p className="text-white font-semibold">98602762.</p>
                 </div>
               </div>
-
+              {/* Email */}
               <div className="flex items-start space-x-3">
                 <div className="w-10 h-10 bg-gray-800 rounded-lg flex items-center justify-center flex-shrink-0">
-                  <Mail className="h-5 w-5 text-white" />
+                  <MdEmail className="h-5 w-5 text-white" />
                 </div>
                 <div>
                   <p className="text-gray-300">Email Support</p>
-                  <p className="text-white font-semibold">PS6000146@gmail.com</p>
+                  <p className="text-white font-semibold">
+                    PS6000146@gmail.com
+                  </p>
                 </div>
               </div>
-
+              {/* Address */}
               <div className="flex items-start space-x-3">
                 <div className="w-10 h-10 bg-gray-800 rounded-lg flex items-center justify-center flex-shrink-0">
-                  <MapPin className="h-5 w-5 text-white" />
+                  <FaMapMarkerAlt className="h-5 w-5 text-white" />
                 </div>
                 <div>
                   <p className="text-gray-300">Head Office</p>
                   <p className="text-white font-semibold">
-                  birendranagar-surkhet ,province-6
+                    birendranagar-surkhet ,province-6
                   </p>
                 </div>
               </div>
@@ -162,45 +155,25 @@ export default function Footer() {
         {/* Features Section */}
         <div className="mt-16 pt-8 border-t border-gray-800">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-            <div className="flex items-center space-x-3 p-4 bg-gray-900 rounded-lg hover:bg-gray-800 transition-colors duration-200">
-              <div className="w-12 h-12 bg-blue-600 rounded-lg flex items-center justify-center">
-                <Shield className="h-6 w-6 text-white" />
+            {[
+              { icon: FaShieldAlt, title: "Secure Booking", desc: "SSL Protected" },
+              { icon: FaClock, title: "24/7 Support", desc: "Always Available" },
+              { icon: FaStar, title: "Best Prices", desc: "Guaranteed" },
+              { icon: FaCreditCard, title: "Easy Payment", desc: "Multiple Options" },
+            ].map(({ icon: Icon, title, desc }, i) => (
+              <div
+                key={i}
+                className="flex items-center space-x-3 p-4 bg-gray-900 rounded-lg hover:bg-gray-800 transition-colors duration-200"
+              >
+                <div className="w-12 h-12 bg-blue-600 rounded-lg flex items-center justify-center">
+                  <Icon className="h-6 w-6 text-white" />
+                </div>
+                <div>
+                  <h5 className="font-semibold text-white">{title}</h5>
+                  <p className="text-gray-400 text-sm">{desc}</p>
+                </div>
               </div>
-              <div>
-                <h5 className="font-semibold text-white">Secure Booking</h5>
-                <p className="text-gray-400 text-sm">SSL Protected</p>
-              </div>
-            </div>
-
-            <div className="flex items-center space-x-3 p-4 bg-gray-900 rounded-lg hover:bg-gray-800 transition-colors duration-200">
-              <div className="w-12 h-12 bg-blue-600 rounded-lg flex items-center justify-center">
-                <Clock className="h-6 w-6 text-white" />
-              </div>
-              <div>
-                <h5 className="font-semibold text-white">24/7 Support</h5>
-                <p className="text-gray-400 text-sm">Always Available</p>
-              </div>
-            </div>
-
-            <div className="flex items-center space-x-3 p-4 bg-gray-900 rounded-lg hover:bg-gray-800 transition-colors duration-200">
-              <div className="w-12 h-12 bg-blue-600 rounded-lg flex items-center justify-center">
-                <Star className="h-6 w-6 text-white" />
-              </div>
-              <div>
-                <h5 className="font-semibold text-white">Best Prices</h5>
-                <p className="text-gray-400 text-sm">Guaranteed</p>
-              </div>
-            </div>
-
-            <div className="flex items-center space-x-3 p-4 bg-gray-900 rounded-lg hover:bg-gray-800 transition-colors duration-200">
-              <div className="w-12 h-12 bg-blue-600 rounded-lg flex items-center justify-center">
-                <CreditCard className="h-6 w-6 text-white" />
-              </div>
-              <div>
-                <h5 className="font-semibold text-white">Easy Payment</h5>
-                <p className="text-gray-400 text-sm">Multiple Options</p>
-              </div>
-            </div>
+            ))}
           </div>
         </div>
       </div>
@@ -214,24 +187,17 @@ export default function Footer() {
                 © 2024 यात्रा Nepal. All rights reserved.
               </p>
               <div className="flex space-x-6">
-                <a
-                  href="#"
-                  className="text-gray-400 hover:text-white text-sm transition-colors duration-200"
-                >
-                  Privacy Policy
-                </a>
-                <a
-                  href="#"
-                  className="text-gray-400 hover:text-white text-sm transition-colors duration-200"
-                >
-                  Terms of Service
-                </a>
-                <a
-                  href="#"
-                  className="text-gray-400 hover:text-white text-sm transition-colors duration-200"
-                >
-                  Cookie Policy
-                </a>
+                {["Privacy Policy", "Terms of Service", "Cookie Policy"].map(
+                  (text) => (
+                    <a
+                      key={text}
+                      href="#"
+                      className="text-gray-400 hover:text-white text-sm transition-colors duration-200"
+                    >
+                      {text}
+                    </a>
+                  )
+                )}
               </div>
             </div>
 
@@ -239,7 +205,7 @@ export default function Footer() {
               <span className="text-gray-400 text-sm">Powered by</span>
               <div className="flex items-center space-x-2">
                 <div className="w-6 h-6 bg-gradient-to-r from-blue-600 to-blue-700 rounded-full flex items-center justify-center">
-                  <Bus className="h-3 w-3 text-white" />
+                  <FaBus className="h-3 w-3 text-white" />
                 </div>
                 <span className="text-white font-semibold text-sm">
                   यात्रा Nepal Technology
