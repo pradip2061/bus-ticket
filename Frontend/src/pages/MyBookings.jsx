@@ -34,7 +34,7 @@ export default function MyBookings() {
   );
 
   return (
-    <div className="p-4">
+    <div className="p-4 min-h-screen">
       <button
         onClick={() => navigate("/")}
         className="mb-4 flex items-center text-blue-600"
