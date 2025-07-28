@@ -25,6 +25,8 @@ state.message = ""
 state.error="",
 state.status = 'success',
 state.message = action.payload
+localStorage.removeItem('role')
+localStorage.removeItem('userid')
 }).addCase(logoutThunk.rejected,(state,action)=>{
 state.error= action.payload,
 state.status = 'failed',
