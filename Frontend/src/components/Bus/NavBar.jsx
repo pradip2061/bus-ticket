@@ -90,7 +90,7 @@ const error = useSelector((state)=>state.logout.error)
         </nav>
 
         {
-          role  === 'operator' &&   <button className=" absolute  ml-[66rem] px-4 py-2 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-100 transition" onClick={()=>navigate('/adminDashBoard')}>
+          role  === 'operator' &&   <button className=" absolute hidden lg:flex ml-[66rem] px-4 py-2 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-100 transition" onClick={()=>navigate('/adminDashBoard')}>
             AdminDashBoard
           </button>
         }
@@ -155,7 +155,11 @@ const error = useSelector((state)=>state.logout.error)
           >
             Contact Us
           </NavLink>
-
+    {
+          role  === 'operator' &&   <button className=" absolute  ml-[66rem] px-4 py-2 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-100 transition" onClick={()=>navigate('/adminDashBoard')}>
+            AdminDashBoard
+          </button>
+        }
       {
         !localStorage.getItem('isLogin') ?     <div className="pt-2 border-t border-gray-200">
             <button className="w-full text-left px-4 py-2 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-100 transition mb-2" onClick={()=>navigate('/loginAndsignin',{ state: 'login' },setMenuOpen(false))}>

@@ -13,17 +13,13 @@ export default function ViewSeats() {
   const [modalOpen, setModalOpen] = useState(false);
   const [selectedSeat, setSelectedSeat] = useState(null);
 
-  // ✅ Fetch seats from API
   const getPathSeats = async () => {
     try {
       setLoading(true);
       const response = await axios.get(
         `${import.meta.env.VITE_BASE_URL}/getpathsolo`,
-        {
-          params: { busid: id },
-        }
+        { params: { busid: id } }
       );
-
       if (response.status === 200 && response.data.businfo) {
         setSeats(response.data.businfo.seats);
       } else {
@@ -40,39 +36,32 @@ export default function ViewSeats() {
     getPathSeats();
   }, [id]);
 
-  // ✅ Separate A Side and B Side
   const aSideSeats =
     seats.filter((seat) => seat.side === "A").length > 0
       ? seats.filter((seat) => seat.side === "A")
-      : seats.slice(0, Math.ceil(seats.length / 2)); // fallback if no 'side' property
+      : seats.slice(0, Math.ceil(seats.length / 2));
   const bSideSeats =
     seats.filter((seat) => seat.side === "B").length > 0
       ? seats.filter((seat) => seat.side === "B")
-      : seats.slice(Math.ceil(seats.length / 2)); // fallback
+      : seats.slice(Math.ceil(seats.length / 2));
 
-  // ✅ Open modal when clicking any seat
   const handleSeatClick = (seat) => {
     setSelectedSeat(seat);
     setModalOpen(true);
   };
 
-  // ✅ Confirm booking/unbooking (Sync with Backend)
   const confirmAction = async () => {
     if (!selectedSeat) return;
-
     try {
       const newStatus = !selectedSeat.isBooked;
-
-      // ✅ API Call to update seat status
       const response = await axios.put(
         `${import.meta.env.VITE_BASE_URL}/updateSeatStatus`,
         {
           busid: id,
           seatId: selectedSeat._id,
           isBooked: newStatus,
-        },{
-          withCredentials:true
-        }
+        },
+        { withCredentials: true }
       );
 
       if (response.status === 200) {
@@ -81,8 +70,6 @@ export default function ViewSeats() {
             newStatus ? "booked" : "unbooked"
           } successfully!`
         );
-
-        // ✅ Update state locally
         setSeats((prevSeats) =>
           prevSeats.map((s) =>
             s._id === selectedSeat._id ? { ...s, isBooked: newStatus } : s
@@ -108,7 +95,7 @@ export default function ViewSeats() {
   return (
     <div className="min-h-screen bg-[#f9fafb] p-4 sm:p-6">
       {/* Header */}
-      <div className="max-w-7xl mx-auto flex items-center gap-4 mb-6">
+      <div className="max-w-7xl mx-auto flex items-center flex-wrap gap-4 mb-6">
         <button
           onClick={() => navigate(-1)}
           className="flex items-center gap-2 text-blue-600 font-medium hover:text-blue-800 transition"
@@ -116,7 +103,7 @@ export default function ViewSeats() {
           <ArrowLeft className="w-5 h-5" />
           Back to Buses
         </button>
-        <h1 className="text-xl sm:text-2xl font-bold text-gray-900 ml-4">
+        <h1 className="text-xl sm:text-2xl font-bold text-gray-900">
           Manage Seats
         </h1>
       </div>
@@ -138,18 +125,18 @@ export default function ViewSeats() {
             </div>
 
             {/* Seat Grid */}
-            <div className="grid grid-cols-2 gap-10 mb-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-6">
               {/* A Side */}
               <div>
                 <h4 className="text-center text-sm font-semibold text-gray-600 mb-2">
                   A Side
                 </h4>
-                <div className="grid grid-cols-2 gap-3">
+                <div className="grid grid-cols-3 sm:grid-cols-4 gap-2">
                   {aSideSeats.map((seat) => (
                     <button
                       key={seat._id}
                       onClick={() => handleSeatClick(seat)}
-                      className={`w-14 h-14 rounded border transition flex justify-center items-center text-sm font-medium ${
+                      className={`aspect-square w-full max-w-[3.5rem] sm:max-w-[4rem] rounded border transition flex justify-center items-center text-sm font-medium ${
                         seat.isBooked
                           ? "bg-rose-100 border-red-400"
                           : "bg-white hover:bg-blue-100 border-blue-300"
@@ -170,12 +157,12 @@ export default function ViewSeats() {
                 <h4 className="text-center text-sm font-semibold text-gray-600 mb-2">
                   B Side
                 </h4>
-                <div className="grid grid-cols-2 gap-3">
+                <div className="grid grid-cols-3 sm:grid-cols-4 gap-2">
                   {bSideSeats.map((seat) => (
                     <button
                       key={seat._id}
                       onClick={() => handleSeatClick(seat)}
-                      className={`w-14 h-14 rounded border transition flex justify-center items-center text-sm font-medium ${
+                      className={`aspect-square w-full max-w-[3.5rem] sm:max-w-[4rem] rounded border transition flex justify-center items-center text-sm font-medium ${
                         seat.isBooked
                           ? "bg-rose-100 border-red-400"
                           : "bg-white hover:bg-blue-100 border-blue-300"
@@ -206,7 +193,7 @@ export default function ViewSeats() {
       {/* Modal */}
       {modalOpen && selectedSeat && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
-          <div className="bg-white rounded-lg p-6 w-80 shadow-lg">
+          <div className="bg-white rounded-lg p-6 w-[90%] max-w-sm shadow-lg">
             <h2 className="text-lg font-bold mb-4 text-gray-800">
               {selectedSeat.isBooked ? "Unbook Seat" : "Book Seat"}
             </h2>
